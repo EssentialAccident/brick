@@ -3,9 +3,15 @@ module Brick
   class GameObject
     attr_reader :x, :y
 
-    def initialize(pos_x, pos_y, _options = {})
-      @x = pos_x
-      @y = pos_y
+    # position - is a vector to describe the position of the Game Object on the window
+    # pos_y - is the Y position of the Game Object on the window
+    # image - is a hash that contains the info for the Game Object image
+    #   :source - is the file for the image
+    #   :sprite_sheet(true, false) whether the image is a sprite sheet or not
+    #   :tileable(true, false) whether the images will be tileable or not
+    def initialize(position, image = {}, _options = {})
+      @position = position
+      @image = Image.new image
     end
 
     def update
