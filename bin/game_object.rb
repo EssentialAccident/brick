@@ -12,6 +12,7 @@ module Brick
     def initialize(position, image = {}, _options = {})
       @position = position
       @image = Image.new image
+      @velocity = Vector2D.new 0, 0
     end
 
     def update

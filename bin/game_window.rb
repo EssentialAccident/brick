@@ -1,4 +1,5 @@
 module Brick
+  SPEED = 2.0
   # This class manages the window and the loop of the game
   class GameWindow < Gosu::Window
     def initialize(width = 600, height = 900)
@@ -7,11 +8,11 @@ module Brick
       self.caption = 'Brick Game'
 
       # Creating the ball
-      @ball = Ball.new Vector2D.new(self.width / 2, self.height / 2)
+      @ball = Ball.new Vector2D.new(self.width / 2, self.height * 0.8)
     end
 
     def update
-      @ball.update
+      @ball.update self
     end
 
     def draw
@@ -21,7 +22,7 @@ module Brick
     def button_down(id)
       case id
       # Closes the game when the player hits the Escape key
-      when Gosu::Kb_Escape
+      when Gosu::KB_ESCAPE
         close
       end
     end
