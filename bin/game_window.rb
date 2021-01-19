@@ -1,8 +1,9 @@
 module Brick
-  SPEED = 2.0
+  SPEED = 5.0
+  FACTOR = 0.25
   # This class manages the window and the loop of the game
   class GameWindow < Gosu::Window
-    def initialize(width = 600, height = 900)
+    def initialize(width = 1024, height = 900)
       # Initializing the window
       super width, height, false
       self.caption = 'Brick Game'
@@ -13,6 +14,8 @@ module Brick
 
     def update
       @ball.update self
+      # For now at the moment of Game Over the window jst will close
+      close if @ball.game_over? self
     end
 
     def draw

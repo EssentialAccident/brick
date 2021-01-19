@@ -4,8 +4,7 @@ module Brick
     def initialize(position)
       super position,
             { source: 'ball.png', tileable: false, sprite_sheet: false }
-      @radius = 16.0
-      @factor = (@radius * 2) / 128.0
+      @radius = @image.width * Brick::FACTOR / 2
       @velocity = Vector2D.new rand(-1.0...1.0), rand(-0.9...-0.2)
     end
 
@@ -18,7 +17,7 @@ module Brick
     end
 
     def draw
-      @image.draw_center @position, 10, @factor
+      @image.draw_center @position, 10, Brick::FACTOR
     end
 
     def wall_collision(position, window)
@@ -28,6 +27,10 @@ module Brick
       @velocity = Vector2D.new((@velocity.x * -1), @velocity.y) if (position.x + @radius) > window.width
       # Checking a collision wiht top wall
       @velocity = Vector2D.new(@velocity.x, (@velocity.y * -1)) if (position.y - @radius).negative?
+    end
+
+    def game_over? window
+      @position.y > window.height
     end
   end
 end
